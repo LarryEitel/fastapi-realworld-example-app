@@ -33,3 +33,18 @@ def get_application() -> FastAPI:
 
 
 app = get_application()
+
+
+
+if __name__ == "__main__":
+    from sys import argv
+    import uvicorn  # type: ignore
+
+    # uvicorn.run("main:app", host="0.0.0.0", reload="--reload" in argv)
+
+
+    # config = app.container.config
+    # API_HOST = config.get("API_HOST")
+    # API_PORT = config.get("API_PORT")
+    # uvicorn.run("app.main:app", host=API_HOST, port=API_PORT, reload=True)
+    uvicorn.run("app.main:app", host="localhost", port=8000, reload=True)
