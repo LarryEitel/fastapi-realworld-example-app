@@ -108,3 +108,5 @@ venv.bak/
 
 # Project
 postgres-data
+
+__dev

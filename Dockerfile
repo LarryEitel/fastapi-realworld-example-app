@@ -15,5 +15,4 @@ ENV DB_HOST=
 ENV DB_NAME=
 ENV DB_PASSWORD=
 ENV ADMIN_PASSWORD=
-CMD alembic upgrade head && \
-    uvicorn --host=0.0.0.0 app.main:app
+CMD alembic upgrade head && uvicorn --host=0.0.0.0 app.main:app
