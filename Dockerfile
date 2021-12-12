@@ -1,21 +1,19 @@
-FROM python:3.8.1-slim
+FROM python:3.9-slim
 
 ENV PYTHONUNBUFFERED 1
 
-EXPOSE 8000
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
+COPY . .
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends netcat && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+EXPOSE 8000
 
-COPY poetry.lock pyproject.toml ./
-RUN pip install poetry==1.1 && \
-    poetry config virtualenvs.in-project true && \
-    poetry install --no-dev
-
-COPY . ./
-
-CMD poetry run alembic upgrade head && \
-    poetry run uvicorn --host=0.0.0.0 app.main:app
+ENV DB_USER=
+ENV DB_HOST=
+ENV DB_NAME=
+ENV DB_PASSWORD=
+ENV ADMIN_PASSWORD=
+CMD alembic upgrade head && \
+    uvicorn --host=0.0.0.0 app.main:app
